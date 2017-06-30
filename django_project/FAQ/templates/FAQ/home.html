@@ -1,0 +1,35 @@
+{% extends "personal/header.html" %}
+
+{% block content %}
+<h1>Frequently Asked Questions</h1>
+<div style="background:#e0e0e0; !important" class="jumbotron">
+	<body>
+		<h3>[Website feature] isn't working.</h3>
+		First of all, that isn't actually a question. But, I understand that things break sometimes, so please go to the <a href="/contact/">contact</a> page to yell at me about it. I'll see what I can do.<br><br>
+		
+		<h3>Why isn't [county, municipality, school district] included?</h3>
+		Sorry about that! I first published the site for public access on June 6th, 2017, so I'm trying to figure out how to automatically acquire all of the various millages legally
+		 (it's a <a href=https://en.wikipedia.org/wiki/Web_scraping#Legal_issues>big deal</a>). On top of that, I'm doing this first and foremost to help out my mom and her real estate agency (which will not be named
+		 because lawsuits!) which is in the Greater Pittsburgh Area (I've already said too much, if you don't hear from me, I'm likely ---
+		<h3>Why did you make this?</h3>
+		Honestly, my mom told me to! She works in Real Estate, and she says that searching for millages is a pain. I figured I could make use of what I knew,
+		 and try to learn a little bit more about web applications programming, and make things a little easier for people.<br><br>
+		 
+		<h3>So, why did you make it the way you did?</h3>
+		Great question! Basically, I thought of how someone would go about finding these values themselves, and the best way to transfer it to an application (as of writing this) was to
+		 make a series of drop-down lists with the various municipalities and school districts that a house could be in. It would be redundant to include counties as a selection,
+		  since the municipality determines which county the house resides in.<br><br>
+		As an aside, I really hope to get Google Maps functionality included so that you can type in the address of the home and the millages just pop right in, but I truly have no idea where to begin with that.
+		 I'm gonna spend all my free time researching that, so just sit tight and cross your fingers!<br><br>
+		
+		<h3>This is incredibly useful and I love it! Why is it free?</h3>
+		Plain and simple: I hate charging people for things, and all I'm really doing is looking up the publicly accessible millages and putting them in an easy-to-use interface. Anyone (yes, anyone) can take the
+		 time to learn how to do this (it's actually a lot of fun to learn programming! Do it!), and charging for it is just rude. Maybe if any Real Estate Brokers would like to mention this site to their Agencies *cough cough*
+		 I could actually make a little bit off of this site! But it's no big deal, I'm used to eating Ramen Noodles breakfast-lunch-dinner.<br><br>
+		
+		<h3>What can't you do?</h3>
+		Get an internship, apparently ;) (If you don't want to buy the site, you could always help me get the ball rolling in that area)<br><br>
+
+	</body>
+</div>
+{% endblock %}

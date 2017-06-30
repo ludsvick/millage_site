@@ -1,0 +1,90 @@
+{% extends "personal/header.html" %}
+
+{% block content %}
+
+<body>
+	<h1>Property Tax Calculator</h1>
+	<div style="background:#e0e0e0; !important" class="jumbotron">
+	<h3><b>Instructions</b></h3>
+	<h5>
+		<ol type=1>
+			<li>Select the county from the drop-down list</li>
+			<li>Select the municipality from the drop-down list</li>
+			<li>The school district millage will <em>automatically</em> be selected</li>
+			<li>Enter the assessed value of the unit</li>
+			<li>Press "Calculate" and the Property Tax will be displayed below!</li>
+		</ol>
+		<ul>
+			<b>*NOTE*</b> McDonald Borough and Trafford Borough are not included in the calculator due to their values being unavailable.
+			<br>Please contact the following Tax Collectors to determine the Municipality and School District Millages:
+			<br><br><b>McDonald Borough</b> John B Bracall <b>Phone:</b> 724-926-8284<br>
+			<br><b>Trafford Borough</b> James Kerrigan <b>Phone:</b> 412-372-5361
+		</ul>
+	</h5><br>
+	
+	<select id="County", onchange=displayCountyMillage()>
+		<option selected disabled>County</option>
+		{% for county in County_results %}
+		<option value={{county.county_millage}}>{{ county.county_name }}</option>
+		{% endfor %}
+		
+	</select>
+	<br>
+	<h4 style="display:inline"><b>County Millage: <p style="display:inline", id="countMill"></p> </b></h4>
+	<br><br>
+	
+	<select disabled id="Municipality", onchange=displayMunicipalMillage()>
+		<option selected disabled>Municipality</option>
+		{% for municipality in Municipality_results %}
+		<option data-district={{municipality.municipality_district.district_millage}} data-districtName="{{municipality.municipality_district.district_name}}" value={{municipality.municipality_millage}} >{{ municipality.municipality_name }}</option>
+		{% endfor %}
+		
+	</select>
+	<br>
+	<h4 style="display:inline"><b>Municipality Millage: <p style="display:inline", id="munMill"></p> </b></h4>
+	<br><br>
+
+	<h4 style="display:inline"><b>School District:</b> <p style="display:inline", id=distName></p></h4>
+	<br>
+
+	<h4 ><b>School District Millage: <p style="display:inline", id=distMill></p> </b></h4>
+	<br><br>
+	
+	<div class="form-group">
+    <h4><b>Assessed Value:</b></h4>
+    <input type=text pattern="[0-9]*" class="form-control" id="assessedVal" placeholder="$">
+	</div>
+	
+	<button id="calculate", onclick=displayTotalMillages() class="btn btn-success">Calculate</button>
+
+	<br><br>
+	
+	<h3 style="display:inline">Total: $</h3><h3 style="display:inline", id="grandTotal"></h3><br><br><br>
+
+	</div>
+	
+	<script type="text/javascript">
+		function displayCountyMillage() {
+		var millage = document.getElementById("County");
+		document.getElementById("countMill").innerHTML = millage.options[millage.selectedIndex].value.toString();
+		document.getElementById("Municipality").removeAttribute("disabled");
+		}
+		function displayMunicipalMillage() {
+		var millage = document.getElementById("Municipality");
+		document.getElementById("munMill").innerHTML = millage.options[millage.selectedIndex].value.toString();
+		document.getElementById("distMill").innerHTML = millage.options[millage.selectedIndex].getAttribute("data-district");
+		document.getElementById("distName").innerHTML = millage.options[millage.selectedIndex].getAttribute("data-districtName");
+		}
+		function displayTotalMillages() {
+		var countMill = document.getElementById("countMill").innerHTML;
+		var munMill = document.getElementById("munMill").innerHTML;
+		var distMill = document.getElementById("distMill").innerHTML;
+		var assessedVal = parseFloat(document.getElementById("assessedVal").value.replace(/,/g, ''));
+		var totalMill = (parseFloat(countMill)+parseFloat(munMill)+parseFloat(distMill)) / 1000;
+		var grandTotal = (totalMill * assessedVal).toFixed(2);
+		grandTotal = Math.ceil(grandTotal);
+		document.getElementById("grandTotal").innerHTML = grandTotal.toString();
+		}
+	</script>
+</body>
+{% endblock %}
